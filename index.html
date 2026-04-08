@@ -1056,6 +1056,19 @@ function closePhotoLB(){
         <span class="unlock-icon">🔓</span>
         <span><span class="unlock-label">Unlock Alpha Gym</span><span class="unlock-hint">TAP TO SHOW DOOR QR CODE</span></span>
       </button>
+      <button class="unlock-btn" style="margin-top:7px;border-color:rgba(26,158,143,0.4);background:rgba(26,158,143,0.1);" onclick="toggleWorkoutPicker()">
+        <span class="unlock-icon">📋</span>
+        <span><span class="unlock-label" style="color:#4fd1c5;">Load Different Workout</span><span class="unlock-hint">OVERRIDE TODAY'S SCHEDULE</span></span>
+      </button>
+      <div id="workoutPickerRow" style="display:none;margin-top:7px;">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="demo-pick-btn demo-pick-1" style="flex:1;min-width:calc(50% - 3px);" onclick="loadWorkout(1)">PUSH A<br><span style="font-size:0.58rem;font-family:'Nunito',sans-serif;font-weight:700;">Chest · Shoulders · Tris</span></button>
+          <button class="demo-pick-btn demo-pick-2" style="flex:1;min-width:calc(50% - 3px);" onclick="loadWorkout(3)">PULL A<br><span style="font-size:0.58rem;font-family:'Nunito',sans-serif;font-weight:700;">Back · Biceps · Rear Delts</span></button>
+          <button class="demo-pick-btn demo-pick-1" style="flex:1;min-width:calc(50% - 3px);" onclick="loadWorkout(6)">PUSH B<br><span style="font-size:0.58rem;font-family:'Nunito',sans-serif;font-weight:700;">Chest · Shoulders · Tris</span></button>
+          <button class="demo-pick-btn demo-pick-2" style="flex:1;min-width:calc(50% - 3px);" onclick="loadWorkout(7)">PULL B<br><span style="font-size:0.58rem;font-family:'Nunito',sans-serif;font-weight:700;">Back · Biceps · Rear Delts</span></button>
+        </div>
+        <button onclick="clearWorkoutOverride()" style="margin-top:6px;width:100%;padding:8px;background:none;border:1px solid var(--border2);border-radius:8px;color:var(--muted);font-size:0.7rem;font-weight:800;letter-spacing:0.08em;cursor:pointer;font-family:'Nunito',sans-serif;">✕ CLEAR OVERRIDE — BACK TO SCHEDULE</button>
+      </div>
       </div>
     </div>
     <div class="avatar-wrap" onclick="document.getElementById('avatarInput').click()">
@@ -1087,7 +1100,7 @@ function closePhotoLB(){
 
   <!-- Schedule strip -->
   <div style="background:var(--dark2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:12px;">
-    <div style="font-size:0.6rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">4 LIFT DAYS · 2 PADEL EVENINGS · 2X FREQUENCY</div>
+    <div style="font-size:0.6rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">4 LIFT DAYS · PADEL ON-DEMAND · 2X FREQUENCY</div>
     <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;">
       <div style="font-size:0.55rem;font-weight:800;color:var(--muted);padding:3px 0;letter-spacing:0.06em;">MON</div>
       <div style="font-size:0.55rem;font-weight:800;color:var(--muted);padding:3px 0;letter-spacing:0.06em;">TUE</div>
@@ -1098,10 +1111,10 @@ function closePhotoLB(){
       <div style="font-size:0.55rem;font-weight:800;color:var(--muted);padding:3px 0;letter-spacing:0.06em;">SUN</div>
       <div style="background:var(--gold-glow);color:var(--gold2);border:1px solid rgba(201,151,42,0.25);border-radius:5px;padding:7px 2px;font-size:0.6rem;font-weight:900;font-family:'Bebas Neue',sans-serif;letter-spacing:0.03em;">P·A</div>
       <div style="background:var(--copper-lt);color:#e8946a;border:1px solid rgba(181,103,58,0.2);border-radius:5px;padding:7px 2px;font-size:0.6rem;font-weight:900;font-family:'Bebas Neue',sans-serif;letter-spacing:0.03em;">PL·A</div>
-      <div style="background:var(--teal-lt);color:#4fd1c5;border:1px solid rgba(26,158,143,0.2);border-radius:5px;padding:7px 2px;font-size:0.65rem;font-weight:900;font-family:'Bebas Neue',sans-serif;letter-spacing:0.03em;">🎾</div>
+      <div style="background:var(--dark3);color:var(--muted2);border-radius:5px;padding:7px 2px;font-size:0.6rem;font-weight:800;letter-spacing:0.04em;">OFF</div>
       <div style="background:var(--gold-glow);color:var(--gold2);border:1px solid rgba(201,151,42,0.25);border-radius:5px;padding:7px 2px;font-size:0.6rem;font-weight:900;font-family:'Bebas Neue',sans-serif;letter-spacing:0.03em;">P·B</div>
       <div style="background:var(--copper-lt);color:#e8946a;border:1px solid rgba(181,103,58,0.2);border-radius:5px;padding:7px 2px;font-size:0.6rem;font-weight:900;font-family:'Bebas Neue',sans-serif;letter-spacing:0.03em;">PL·B</div>
-      <div style="background:var(--teal-lt);color:#4fd1c5;border:1px solid rgba(26,158,143,0.2);border-radius:5px;padding:7px 2px;font-size:0.65rem;font-weight:900;font-family:'Bebas Neue',sans-serif;letter-spacing:0.03em;">🎾</div>
+      <div style="background:var(--dark3);color:var(--muted2);border-radius:5px;padding:7px 2px;font-size:0.6rem;font-weight:800;letter-spacing:0.04em;">OFF</div>
       <div style="background:var(--dark3);color:var(--muted2);border-radius:5px;padding:7px 2px;font-size:0.6rem;font-weight:800;letter-spacing:0.04em;">OFF</div>
     </div>
   </div>
@@ -1137,15 +1150,6 @@ function closePhotoLB(){
     <div class="plan-ex-row" style="padding-bottom:12px;opacity:0.7;"><span class="plan-ex-icon">🔗</span><div><div class="plan-ex-name" style="color:var(--muted);">Cable Face Pull <span style="font-size:0.65rem;color:#38b2ac;font-weight:800;letter-spacing:0.06em;">EXTRA</span></div><div class="plan-ex-detail">2 × 15–20 · gym80 Cable Art · rope, high pulley · after machines</div></div></div>
   </div>
 
-  <!-- WED PADEL -->
-  <div class="plan-section">
-    <div class="plan-hdr" style="background:rgba(26,158,143,0.06);">
-      <div><div class="plan-hdr-title" style="color:#4fd1c5;">WEDNESDAY — PADEL EVENING</div><div style="font-size:0.7rem;color:var(--muted);font-weight:600;margin-top:2px;">Morning free · Padel at night · Active recovery</div></div>
-    </div>
-    <div class="plan-ex-row"><span class="plan-ex-icon">🎾</span><div><div class="plan-ex-name">Padel Match (Evening)</div><div class="plan-ex-detail">1.5L water + electrolytes + 3g taurine · Ice Barrel after</div></div></div>
-    <div class="plan-ex-row" style="padding-bottom:12px;border:none;"><span class="plan-ex-icon">🌅</span><div><div class="plan-ex-name">Morning — Rest & Recovery</div><div class="plan-ex-detail">No gym. Let Push A + Pull A stimulus do its work.</div></div></div>
-  </div>
-
   <!-- PUSH B -->
   <div class="plan-section">
     <div class="plan-hdr" style="background:rgba(201,151,42,0.06);">
@@ -1174,15 +1178,6 @@ function closePhotoLB(){
     <div class="plan-ex-row"><span class="plan-ex-icon">💪</span><div><div class="plan-ex-name">Machine Preacher Curl</div><div class="plan-ex-detail">3 × 12–15 · gym80 Sygnum selectorized · 60s rest · supinated grip</div></div></div>
     <div class="plan-ex-row"><span class="plan-ex-icon">🧱</span><div><div class="plan-ex-name">Decline Bench Abs</div><div class="plan-ex-detail">3 × 15–20 · gym80 decline bench · 45s rest</div></div></div>
     <div class="plan-ex-row" style="padding-bottom:12px;opacity:0.7;"><span class="plan-ex-icon">🔗</span><div><div class="plan-ex-name" style="color:var(--muted);">Cable Face Pull <span style="font-size:0.65rem;color:#38b2ac;font-weight:800;letter-spacing:0.06em;">EXTRA</span></div><div class="plan-ex-detail">2 × 15–20 · gym80 Cable Art · rope, high pulley · after machines</div></div></div>
-  </div>
-
-  <!-- SAT PADEL -->
-  <div class="plan-section" style="margin-bottom:0;">
-    <div class="plan-hdr" style="background:rgba(26,158,143,0.06);">
-      <div><div class="plan-hdr-title" style="color:#4fd1c5;">SATURDAY — PADEL EVENING</div><div style="font-size:0.7rem;color:var(--muted);font-weight:600;margin-top:2px;">Morning rest · Padel at night · Weekly recovery</div></div>
-    </div>
-    <div class="plan-ex-row"><span class="plan-ex-icon">🎾</span><div><div class="plan-ex-name">Padel Match (Evening)</div><div class="plan-ex-detail">1.5L water + electrolytes + 3g taurine · Ice Barrel after</div></div></div>
-    <div class="plan-ex-row" style="padding-bottom:12px;border:none;"><span class="plan-ex-icon">🌅</span><div><div class="plan-ex-name">Morning — Rest & Recovery</div><div class="plan-ex-detail">Full body recovery day. Legs working hard on court tonight.</div></div></div>
   </div>
 </div>
 
@@ -1503,9 +1498,11 @@ PROGRAM[7] = {
 
 // Day mapping — 4-day Push/Pull × 2 + Padel 2x/week (evening only)
 // Mon=Push A, Tue=Pull A, Wed=free(Padel eve), Thu=Push B, Fri=Pull B, Sat=free(Padel eve), Sun=Rest
-const PADEL_DAYS = new Set([3, 6]); // Wed & Sat evenings — gym free in morning
 const LIFT_DAYS  = {1:1, 2:3, 4:6, 5:7}; // Mon→PushA, Tue→PullA, Thu→PushB, Fri→PullB
 const DAY_MAP = {1:1, 2:3, 4:6, 5:7};
+
+function isPadelDay(d){ return false; } // Padel is now on-demand, no fixed days
+function getWorkoutForDate(d){ const dw=d.getUTCDay(); return DAY_MAP[dw]||null; }
 
 // ── BALI TIME (WITA = UTC+8) ─────────────────────────────────────
 // All date logic uses Bali local time so the calendar and workout
@@ -1524,8 +1521,8 @@ function baliDateKey(d){
 }
 
 function getTodayWorkout(){ return DAY_MAP[baliNow().getUTCDay()]||null; }
-function isPadelDay(d){ return PADEL_DAYS.has((d||baliNow()).getUTCDay()); }
-function getWorkoutForDate(d){ const dw=d.getUTCDay(); if(PADEL_DAYS.has(dw)) return 'PADEL'; return DAY_MAP[dw]||null; }
+function isPadelDay(d){ return false; } // Padel is now on-demand, no fixed days
+function getWorkoutForDate(d){ const dw=d.getUTCDay(); return DAY_MAP[dw]||null; }
 
 // ================================================================
 // STATE
@@ -1675,6 +1672,38 @@ function saveSetWeight(exId, setIdx, val){
 let demoKey = null;
 function enterDemo(k){ demoKey=k; renderToday(); window.scrollTo(0,0); }
 function exitDemo(){ demoKey=null; renderToday(); window.scrollTo(0,0); }
+
+// ── WORKOUT OVERRIDE — load any workout any day, saves progress for real ──
+function getWorkoutOverride(){
+  const stored = localStorage.getItem('zbrWorkoutOverride');
+  if(!stored) return null;
+  try {
+    const {key, date} = JSON.parse(stored);
+    // Auto-expire at midnight Bali time (new day = clear override)
+    if(date !== todayKey()) { localStorage.removeItem('zbrWorkoutOverride'); return null; }
+    return key;
+  } catch(e){ return null; }
+}
+function setWorkoutOverride(k){
+  localStorage.setItem('zbrWorkoutOverride', JSON.stringify({key:k, date:todayKey()}));
+}
+function loadWorkout(k){
+  setWorkoutOverride(k);
+  document.getElementById('workoutPickerRow').style.display='none';
+  renderToday();
+  window.scrollTo(0,0);
+}
+function clearWorkoutOverride(){
+  localStorage.removeItem('zbrWorkoutOverride');
+  document.getElementById('workoutPickerRow').style.display='none';
+  renderToday();
+  window.scrollTo(0,0);
+}
+function toggleWorkoutPicker(){
+  const row = document.getElementById('workoutPickerRow');
+  row.style.display = row.style.display==='none' ? 'block' : 'none';
+}
+
 function flashDemo(){
   let t=document.getElementById('demoToast');
   if(!t){
@@ -1779,7 +1808,7 @@ const BADGE_BORDER = {1:'rgba(201,151,42,0.25)', 3:'rgba(181,103,58,0.25)', 6:'r
 
 function renderToday(){
   const content = document.getElementById('todayContent');
-  const realKey = getTodayWorkout();
+  const realKey = getWorkoutOverride() || getTodayWorkout();
   const workoutKey = demoKey || realKey;
   const {state, session, key} = getTodaySession();
 
@@ -1787,51 +1816,6 @@ function renderToday(){
   document.getElementById('headerGreeting').textContent = h<12?'GOOD MORNING':h<17?'GOOD AFTERNOON':'GOOD EVENING';
   document.getElementById('streakNum').textContent = calcStreak();
   document.getElementById('padelCount').textContent = calcPadelThisWeek();
-
-  // Padel day
-  if(!demoKey && isPadelDay()){
-    content.innerHTML=`
-    <div class="padel-card">
-      <div class="big-emoji">🎾</div>
-      <h2>PADEL DAY</h2>
-      <p>Today is an active recovery and performance training day. Padel IS the workout.</p>
-      <div class="padel-protocol">
-        💧 1.5L water + high-dose electrolytes + 3g Taurine<br>
-        🧊 15–20 min Ice Barrel / Sauna after match
-      </div>
-    </div>
-    <div style="background:rgba(104,211,145,0.08);border:1px solid rgba(104,211,145,0.25);border-radius:14px;padding:16px;margin-bottom:14px;">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.08em;color:#68d391;margin-bottom:10px;">🦾 ELBOW REHAB — DO THIS TODAY</div>
-      <div style="font-size:0.78rem;color:var(--muted);font-weight:600;line-height:1.6;margin-bottom:10px;">Daily protocol for your tennis elbow. Do <strong style="color:var(--off);">before</strong> your Padel match.</div>
-      <div style="font-size:0.78rem;color:var(--off);font-weight:700;margin-bottom:4px;">1. Wrist Extension Stretch × 3</div>
-      <div style="font-size:0.72rem;color:var(--muted);font-weight:600;margin-bottom:10px;">Arm straight, palm down, wrist dropped. Other hand pulls hand toward body. Hold 30–45s. Rest 30s. Repeat × 3. Do BEFORE and AFTER match.</div>
-      <div style="font-size:0.78rem;color:var(--off);font-weight:700;margin-bottom:4px;">2. Eccentric Wrist Extension — 3 × 15</div>
-      <div style="font-size:0.72rem;color:var(--muted);font-weight:600;margin-bottom:10px;">Forearm on table, palm down, wrist over edge. Good hand lifts wrist up. Affected arm lowers slowly over 4 full seconds. 0.5–2kg. 30s between sets.</div>
-      <div style="font-size:0.78rem;color:var(--off);font-weight:700;margin-bottom:4px;">3. Forearm Supination / Pronation — 3 × 15</div>
-      <div style="font-size:0.72rem;color:var(--muted);font-weight:600;">Elbow at 90°, forearm on thigh, light dumbbell vertical. Rotate palm up → palm down. 2 seconds each direction. 0.5–1kg.</div>
-    </div>
-    <button class="preview-btn" style="margin-top:14px;" onclick="this.nextElementSibling.style.display='flex'">
-      👁 PREVIEW A LIFTING SESSION
-      <span class="preview-btn-sub">See any workout day before you get there</span>
-    </button>
-    <div class="demo-picker" style="display:none;">
-      <button class="demo-pick-btn demo-pick-1" onclick="enterDemo(1)">PUSH A<br><span style="font-size:0.58rem;font-family:'Nunito',sans-serif;font-weight:700;">Monday</span></button>
-      <button class="demo-pick-btn demo-pick-2" onclick="enterDemo(3)">PULL A<br><span style="font-size:0.58rem;font-family:'Nunito',sans-serif;font-weight:700;">Tuesday</span></button>
-      <button class="demo-pick-btn demo-pick-1" onclick="enterDemo(6)">PUSH B<br><span style="font-size:0.58rem;font-family:'Nunito',sans-serif;font-weight:700;">Thursday</span></button>
-      <button class="demo-pick-btn demo-pick-2" onclick="enterDemo(7)">PULL B<br><span style="font-size:0.58rem;font-family:'Nunito',sans-serif;font-weight:700;">Friday</span></button>
-    </div>
-    ${renderPadelLogBlock()}
-    `;
-
-    // Mark padel session as done if not already
-    if(!session.completed){
-      const {state:s2,session:sess2,key:k2}=getTodaySession();
-      sess2.completed=true; s2.sessions[k2]=sess2; saveState(s2);
-    }
-    document.getElementById('timerFab').classList.remove('visible');
-    renderPadelLog();
-    return;
-  }
 
   // Rest day
   if(!workoutKey){
@@ -1876,6 +1860,8 @@ function renderToday(){
 
   if(demoKey){
     html+=`<div class="demo-banner"><div><span>👁 PREVIEW</span> — ${workout.name}</div><button class="demo-exit" onclick="exitDemo()">✕ EXIT</button></div>`;
+  } else if(getWorkoutOverride()){
+    html+=`<div class="demo-banner" style="border-color:rgba(26,158,143,0.3);background:rgba(26,158,143,0.06);"><div><span style="color:#4fd1c5;">📋 OVERRIDE</span> — ${workout.name}</div><button class="demo-exit" style="background:#4fd1c5;" onclick="clearWorkoutOverride()">✕ CLEAR</button></div>`;
   }
 
   if(session.completed && !demoKey){
@@ -2006,7 +1992,7 @@ function getNextWorkoutLabel(){
   for(let i=1;i<=7;i++){
     d=new Date(d.getTime()+24*60*60*1000);
     const wd=getWorkoutForDate(d);
-    if(wd) return wd==='PADEL'?`${days[d.getUTCDay()]} (Padel)`:days[d.getUTCDay()];
+    if(wd) return days[d.getUTCDay()];
   }
   return 'Soon';
 }
@@ -2089,10 +2075,9 @@ function renderHistory(){
       const d=new Date(Date.UTC(md.getUTCFullYear(),md.getUTCMonth(),day));
       const k=baliDateKey(d);
       const isToday=k===todayK, isFuture=k>todayK;
-      const isDone=sessions[k]&&sessions[k].completed, isPadel=isPadelDay(d);
+      const isDone=sessions[k]&&sessions[k].completed;
       let cls='cal-day';
       if(isFuture) cls+=' future';
-      else if(isDone&&isPadel) cls+=' padel';
       else if(isDone) cls+=' done';
       else if(!getWorkoutForDate(d)) cls+=' rest';
       if(isToday) cls+=' today';
@@ -2102,15 +2087,14 @@ function renderHistory(){
   }
   document.getElementById('calendarContent').innerHTML=calHtml;
 
-  const workoutNames={1:'Push A — Chest & Shoulders',3:'Pull A — Back & Biceps',6:'Push B — Chest & Shoulders',7:'Pull B — Back & Biceps',PADEL:'Padel'};
+  const workoutNames={1:'Push A — Chest & Shoulders',3:'Pull A — Back & Biceps',6:'Push B — Chest & Shoulders',7:'Pull B — Back & Biceps'};
   const recent=Object.entries(sessions).filter(([,v])=>v.completed).sort(([a],[b])=>b.localeCompare(a)).slice(0,8);
   let hHtml=recent.length===0?`<div style="text-align:center;padding:24px;color:var(--muted);font-weight:700;font-size:0.84rem;">No sessions yet. Time to start.</div>`:'';
   recent.forEach(([k])=>{
-    // k is YYYY-MM-DD in Bali time — parse as UTC to avoid timezone shift
     const [yr,mo,dy]=k.split('-').map(Number);
     const d=new Date(Date.UTC(yr,mo-1,dy));
     const wd=getWorkoutForDate(d);
-    const label=wd?(wd==='PADEL'?'Padel Session':(workoutNames[wd]||'Session')):'Session';
+    const label=wd?(workoutNames[wd]||'Session'):'Session';
     hHtml+=`<div class="hist-entry"><div><h4>${label}</h4><p>${d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'UTC'})}</p></div><div style="color:var(--gold2);font-size:1.1rem;">✓</div></div>`;
   });
   document.getElementById('historyList').innerHTML=hHtml;
@@ -2246,7 +2230,7 @@ function showPanel(name){
   if(name==='today') renderToday();
   if(name==='history') renderHistory();
   if(name==='reminders') loadNotifState();
-  document.getElementById('timerFab').classList.toggle('visible', name==='today'&&!!(demoKey||getTodayWorkout()||isPadelDay()));
+  document.getElementById('timerFab').classList.toggle('visible', name==='today'&&!!(demoKey||getTodayWorkout()||getWorkoutOverride()));
 }
 
 // ================================================================
